@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
 
 const Addproduct = ()=>{
     const [name,setName]=React.useState('');
@@ -6,6 +7,14 @@ const Addproduct = ()=>{
     const [category,setCategory]=React.useState('');
     const [company,setCompany]=React.useState('');
     const [error,setError]=React.useState(false)
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const auth = localStorage.getItem('product');
+        if(auth){
+            navigate("/")
+        }
+    })
 
     const addProduct= async()=>{
 
@@ -29,8 +38,9 @@ const Addproduct = ()=>{
         }
         });
 
-        result = await result.json();
+        result = await result.JSON
         console.warn(result)
+        navigate('/')
     }
 
     return(
